@@ -15,32 +15,30 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TSE_Automation
-build_property.ProjectDir = C:\Users\User\OneDrive\Masaüstü\TSE_Automation\
+build_property.ProjectDir = C:\Users\Burak\Desktop\TSE_Automation\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
-build_property.EffectiveAnalysisLevelStyle = 8.0
-build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/App.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/Screens/AnaSayfa/AnaSayfaView.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/Screens/AnaSayfa/AnaSayfaView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/Screens/DeneyEkle/DeneyEkleView.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/Screens/DeneyEkle/DeneyEkleView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/Screens/DeneyListe/DeneyListeView.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/Screens/DeneyListe/DeneyListeView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/Screens/FirmaEkle/FirmaEklePopup.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/Screens/FirmaEkle/FirmaEklePopup.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/Screens/Istatistik/IstatistikView.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/Screens/Istatistik/IstatistikView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/Screens/PersonelEkle/PersonelEklePopup.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/Screens/PersonelEkle/PersonelEklePopup.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/User/OneDrive/Masaüstü/TSE_Automation/Views/MainWindow.axaml]
+[C:/Users/Burak/Desktop/TSE_Automation/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
