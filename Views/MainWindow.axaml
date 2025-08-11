@@ -157,29 +157,6 @@
                             </Button.Styles>
                         </Button>
                         
-                        <!-- Firma Ekle Butonu - YENİ -->
-                        <Button x:Name="FirmaEkleButton"
-                                Background="#C0392B"
-                                Foreground="White"
-                                Margin="0,8"
-                                Padding="15,12"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Left"
-                                BorderThickness="0"
-                                CornerRadius="6"
-                                FontWeight="SemiBold"
-                                Click="FirmaEkleButton_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="🏢" FontSize="14" Margin="0,0,10,0"/>
-                                <TextBlock Text="Firma Ekle" FontSize="14"/>
-                            </StackPanel>
-                            <Button.Styles>
-                                <Style Selector="Button:pointerover">
-                                    <Setter Property="Background" Value="#A93226"/>
-                                </Style>
-                            </Button.Styles>
-                        </Button>
-                        
                     </StackPanel>
                 </Border>
             </SplitView.Pane>

@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Avalonia.Controls;
+using Avalonia;
+using TSE_Automation.Views;
 
 namespace TSE_Automation.ViewModels;
 
@@ -128,9 +131,21 @@ public partial class DeneyEkleViewModel : ViewModelBase
         Belgelendirme = false;
         DeneySayisi = 1;
     }
-        [RelayCommand]
+    [RelayCommand]
     private void FirmaEkle()
     {
-        // TODO: FirmaEkleView'e navigasyon
+        // MainWindow'u bul ve FirmaEkle sayfasını aç
+        if (Application.Current?.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            if (desktop.MainWindow is MainWindow mainWindow)
+            {
+                var firmaEkleView = new FirmaEkleView();
+                var mainContentControl = mainWindow.FindControl<ContentControl>("MainContentControl");
+                if (mainContentControl != null)
+                {
+                    mainContentControl.Content = firmaEkleView;
+                }
+            }
+        }
     }
 }

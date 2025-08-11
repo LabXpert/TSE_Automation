@@ -32,10 +32,4 @@ public partial class MainWindow : Window
         var deneySilDuzenleView = new DeneySilDuzenleView();
         MainContentControl.Content = deneySilDuzenleView;
     }
-
-    private void FirmaEkleButton_Click(object? sender, RoutedEventArgs e)
-    {
-        var firmaEkleView = new FirmaEkleView();
-        MainContentControl.Content = firmaEkleView;
-    }
 }
