@@ -12,18 +12,22 @@
             <Setter Property="BorderBrush" Value="#BDC3C7"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Template">
                 <ControlTemplate>
                     <Border Background="White" 
                             BorderBrush="#BDC3C7" 
                             BorderThickness="1" 
-                            CornerRadius="6">
+                            CornerRadius="6"
+                            Height="{TemplateBinding Height}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            MaxHeight="{TemplateBinding MaxHeight}">
                         <ScrollViewer x:Name="PART_ScrollViewer">
                             <TextPresenter x:Name="PART_TextPresenter"
                                            Text="{TemplateBinding Text}"
                                            CaretBrush="Black"
                                            SelectionBrush="#3498DB"
-                                           TextWrapping="{TemplateBinding TextWrapping}"
+                                           TextWrapping="Wrap"
                                            PasswordChar="{TemplateBinding PasswordChar}"
                                            SelectionStart="{TemplateBinding SelectionStart}"
                                            SelectionEnd="{TemplateBinding SelectionEnd}"
@@ -142,6 +146,7 @@
                                      Theme="{StaticResource SabitTextBox}"
                                      Watermark="Firma adını giriniz"
                                      Padding="12,10"
+                                     Height="35"
                                      FontSize="14"/>
                         </StackPanel>
 
@@ -156,6 +161,7 @@
                                      Theme="{StaticResource SabitTextBox}"
                                      Watermark="0555 123 45 67"
                                      Padding="12,10"
+                                     Height="35"
                                      FontSize="14"/>
                         </StackPanel>
 
@@ -170,6 +176,7 @@
                                      Theme="{StaticResource SabitTextBox}"
                                      Watermark="1234567890"
                                      Padding="12,10"
+                                     Height="35"
                                      FontSize="14"/>
                         </StackPanel>
 
@@ -184,6 +191,7 @@
                                      Theme="{StaticResource SabitTextBox}"
                                      Watermark="Yetkili kişi adı"
                                      Padding="12,10"
+                                     Height="35"
                                      FontSize="14"/>
                         </StackPanel>
 
