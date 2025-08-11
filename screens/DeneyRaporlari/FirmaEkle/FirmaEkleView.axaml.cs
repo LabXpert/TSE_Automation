@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using TSE_Automation.ViewModels;
 
 namespace TSE_Automation.Views
 {
@@ -8,6 +9,7 @@ namespace TSE_Automation.Views
         public FirmaEkleView()
         {
             AvaloniaXamlLoader.Load(this);
+            DataContext = new FirmaEkleViewModel();
         }
     }
 }

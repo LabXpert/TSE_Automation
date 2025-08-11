@@ -1,10 +1,307 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="TSE_Automation.Views.FirmaEkleView">
-    <Grid>
-        <TextBlock Text="Firma Ekle Sayfası" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   FontSize="24"/>
-    </Grid>
+             xmlns:vm="using:TSE_Automation.ViewModels"
+             x:Class="TSE_Automation.Views.FirmaEkleView"
+             x:DataType="vm:FirmaEkleViewModel">
+
+    <UserControl.Resources>
+        <!-- Sabit TextBox Stili -->
+        <ControlTheme x:Key="SabitTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="#BDC3C7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="White" 
+                            BorderBrush="#BDC3C7" 
+                            BorderThickness="1" 
+                            CornerRadius="6">
+                        <ScrollViewer x:Name="PART_ScrollViewer">
+                            <TextPresenter x:Name="PART_TextPresenter"
+                                           Text="{TemplateBinding Text}"
+                                           CaretBrush="Black"
+                                           SelectionBrush="#3498DB"
+                                           TextWrapping="{TemplateBinding TextWrapping}"
+                                           PasswordChar="{TemplateBinding PasswordChar}"
+                                           SelectionStart="{TemplateBinding SelectionStart}"
+                                           SelectionEnd="{TemplateBinding SelectionEnd}"
+                                           Foreground="Black"/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </ControlTheme>
+
+        <!-- Sabit Button Gri -->
+        <ControlTheme x:Key="SabitButtonGri" TargetType="Button">
+            <Setter Property="Background" Value="#95A5A6"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="ButtonBorder"
+                            Background="#95A5A6" 
+                            CornerRadius="6" 
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}" 
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"
+                                          TextElement.Foreground="White"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pressed /template/ Border#ButtonBorder">
+                <Setter Property="RenderTransform" Value="scale(0.95)"/>
+            </Style>
+        </ControlTheme>
+
+        <!-- Sabit Button Yeşil -->
+        <ControlTheme x:Key="SabitButtonYesil" TargetType="Button">
+            <Setter Property="Background" Value="#27AE60"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="ButtonBorder"
+                            Background="#27AE60" 
+                            CornerRadius="6" 
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter Content="{TemplateBinding Content}" 
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"
+                                          TextElement.Foreground="White"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+            <Style Selector="^:pressed /template/ Border#ButtonBorder">
+                <Setter Property="RenderTransform" Value="scale(0.95)"/>
+            </Style>
+        </ControlTheme>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Üst Bölüm - Firma Ekleme Formu -->
+            <Border Grid.Row="0" 
+                    Background="White"
+                    CornerRadius="12"
+                    BoxShadow="0 4 16 0 #20000000"
+                    Padding="30"
+                    Margin="0,0,0,30">
+                <StackPanel>
+                    
+                    <!-- Başlık -->
+                    <Border Background="#E74C3C" 
+                            CornerRadius="8" 
+                            Padding="20,15" 
+                            Margin="0,0,0,30">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="🏢" FontSize="24" Margin="0,0,15,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Firma Ekle" 
+                                       Foreground="White" 
+                                       FontSize="22" 
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Form Alanları -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Firma Adı -->
+                        <StackPanel Grid.Column="0" Grid.Row="0">
+                            <TextBlock Text="Firma Adı *" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="14"
+                                       Foreground="#2C3E50"
+                                       Margin="0,0,0,8"/>
+                            <TextBox x:Name="FirmaAdiTextBox"
+                                     Theme="{StaticResource SabitTextBox}"
+                                     Watermark="Firma adını giriniz"
+                                     Padding="12,10"
+                                     FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- Telefon -->
+                        <StackPanel Grid.Column="2" Grid.Row="0">
+                            <TextBlock Text="Telefon *" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="14"
+                                       Foreground="#2C3E50"
+                                       Margin="0,0,0,8"/>
+                            <TextBox x:Name="TelefonTextBox"
+                                     Theme="{StaticResource SabitTextBox}"
+                                     Watermark="0555 123 45 67"
+                                     Padding="12,10"
+                                     FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- Vergi Numarası -->
+                        <StackPanel Grid.Column="0" Grid.Row="2">
+                            <TextBlock Text="Vergi Numarası" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="14"
+                                       Foreground="#2C3E50"
+                                       Margin="0,0,0,8"/>
+                            <TextBox x:Name="VergiNumarasiTextBox"
+                                     Theme="{StaticResource SabitTextBox}"
+                                     Watermark="1234567890"
+                                     Padding="12,10"
+                                     FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- Yetkili -->
+                        <StackPanel Grid.Column="2" Grid.Row="2">
+                            <TextBlock Text="Yetkili Kişi *" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="14"
+                                       Foreground="#2C3E50"
+                                       Margin="0,0,0,8"/>
+                            <TextBox x:Name="YetkiliTextBox"
+                                     Theme="{StaticResource SabitTextBox}"
+                                     Watermark="Yetkili kişi adı"
+                                     Padding="12,10"
+                                     FontSize="14"/>
+                        </StackPanel>
+
+                        <!-- Adres -->
+                        <StackPanel Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3">
+                            <TextBlock Text="Adres" 
+                                       FontWeight="SemiBold" 
+                                       FontSize="14"
+                                       Foreground="#2C3E50"
+                                       Margin="0,0,0,8"/>
+                            <TextBox x:Name="AdresTextBox"
+                                     Theme="{StaticResource SabitTextBox}"
+                                     Watermark="Firma adresini giriniz"
+                                     Padding="12,10"
+                                     FontSize="14"
+                                     Height="80"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"/>
+                        </StackPanel>
+
+                        <!-- Butonlar -->
+                        <StackPanel Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3"
+                                   Orientation="Horizontal"
+                                   HorizontalAlignment="Right">
+                            
+                            <Button x:Name="TemizleButton"
+                                    Theme="{StaticResource SabitButtonGri}"
+                                    Content="Temizle"
+                                    Padding="20,12"
+                                    Margin="0,0,15,0"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"/>
+
+                            <Button x:Name="KaydetButton"
+                                    Theme="{StaticResource SabitButtonYesil}"
+                                    Content="Firma Kaydet"
+                                    Padding="20,12"
+                                    FontWeight="SemiBold"
+                                    FontSize="14"/>
+                        </StackPanel>
+
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Alt Bölüm - Son Eklenen Firmalar -->
+            <Border Grid.Row="1" 
+                    Background="White"
+                    CornerRadius="12"
+                    BoxShadow="0 4 16 0 #20000000"
+                    Padding="30">
+                <StackPanel>
+                    
+                    <!-- Başlık -->
+                    <Border Background="#3498DB" 
+                            CornerRadius="8" 
+                            Padding="20,15" 
+                            Margin="0,0,0,20">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="📋" FontSize="20" Margin="0,0,15,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Son Eklenen Firmalar" 
+                                       Foreground="White" 
+                                       FontSize="18" 
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Firmalar Listesi -->
+                    <ItemsControl ItemsSource="{Binding SonEklenenFirmalar}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#F8F9FA"
+                                        BorderBrush="#E9ECEF"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        Padding="20,15"
+                                        Margin="0,0,0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="{Binding FirmaAdi}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="16"
+                                                       Foreground="#2C3E50"
+                                                       Margin="0,0,0,5"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Yetkili: " Foreground="#7F8C8D" FontSize="13"/>
+                                                <TextBlock Text="{Binding Yetkili}" 
+                                                           FontSize="13"
+                                                           Foreground="#7F8C8D"
+                                                           Margin="0,0,20,0"/>
+                                                <TextBlock Text="Tel: " Foreground="#7F8C8D" FontSize="13"/>
+                                                <TextBlock Text="{Binding Telefon}" 
+                                                           FontSize="13"
+                                                           Foreground="#7F8C8D"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding EklenmeTarihi, StringFormat='{}{0:dd.MM.yyyy}'}" 
+                                                   FontSize="12"
+                                                   Foreground="#95A5A6"
+                                                   VerticalAlignment="Center"
+                                                   Margin="20,0"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>
+            </Border>
+
+        </Grid>
+    </ScrollViewer>
 </UserControl>
