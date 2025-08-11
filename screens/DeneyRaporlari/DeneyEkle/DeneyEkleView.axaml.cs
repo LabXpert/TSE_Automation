@@ -1,13 +1,13 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using TSE_Automation.ViewModels;
 
-namespace TSE_Automation.Views
-{
-    public partial class DeneyEkleView : UserControl
+namespace TSE_Automation.Views;
+
+public partial class DeneyEkleView : UserControl
+{  public DeneyEkleView()
     {
-        public DeneyEkleView()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
+        AvaloniaXamlLoader.Load(this);
+        DataContext = new DeneyEkleViewModel();
     }
 }

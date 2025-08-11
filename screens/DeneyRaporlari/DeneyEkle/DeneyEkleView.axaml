@@ -1,10 +1,339 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="TSE_Automation.Views.DeneyEkleView">
-    <Grid>
-        <TextBlock Text="Deney Ekle Sayfası" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   FontSize="24"/>
-    </Grid>
+             xmlns:dataControls="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+             x:Class="TSE_Automation.Views.DeneyEkleView"
+             x:CompileBindings="False"
+             x:Name="root">
+    
+    <!-- Global Stiller -->
+    <UserControl.Styles>
+        <!-- ComboBox Stilleri -->
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#2c3e50"/>
+            <Setter Property="BorderBrush" Value="#bdc3c7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="ComboBox:focus">
+            <Setter Property="BorderBrush" Value="#3498db"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style Selector="ComboBox:pointerover">
+            <Setter Property="BorderBrush" Value="#95a5a6"/>
+        </Style>
+        
+        <!-- TextBox Stilleri -->
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#2c3e50"/>
+            <Setter Property="BorderBrush" Value="#bdc3c7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="TextBox:focus">
+            <Setter Property="BorderBrush" Value="#3498db"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style Selector="TextBox:pointerover">
+            <Setter Property="BorderBrush" Value="#95a5a6"/>
+        </Style>
+        
+        <!-- NumericUpDown Stilleri -->
+        <Style Selector="NumericUpDown">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#2c3e50"/>
+            <Setter Property="BorderBrush" Value="#bdc3c7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="NumericUpDown:focus">
+            <Setter Property="BorderBrush" Value="#3498db"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style Selector="NumericUpDown:pointerover">
+            <Setter Property="BorderBrush" Value="#95a5a6"/>
+        </Style>
+        
+        <!-- DatePicker Stilleri -->
+        <Style Selector="DatePicker">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#2c3e50"/>
+            <Setter Property="BorderBrush" Value="#bdc3c7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="4"/>
+        </Style>
+        <Style Selector="DatePicker:focus">
+            <Setter Property="BorderBrush" Value="#3498db"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style Selector="DatePicker:pointerover">
+            <Setter Property="BorderBrush" Value="#95a5a6"/>
+        </Style>
+        
+        <!-- DatePicker Button stili (tarih seçme ikonu için) -->
+        <Style Selector="DatePicker /template/ Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        
+        <!-- RadioButton Hover düzeltmesi -->
+        <Style Selector="RadioButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="RadioButton:pointerover">
+            <Setter Property="Foreground" Value="#2c3e50"/>
+        </Style>
+        
+        <!-- CheckBox Hover düzeltmesi -->
+        <Style Selector="CheckBox:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="CheckBox:pointerover">
+            <Setter Property="Foreground" Value="#2c3e50"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid RowDefinitions="Auto,Auto,Auto,*" Margin="20">
+            
+            <!-- Başlık -->
+            <Border Grid.Row="0" 
+                    Background="#f8f9fa" 
+                    CornerRadius="8" 
+                    Padding="15" 
+                    Margin="0,0,0,20">
+                <TextBlock Text="Deney Ekleme Formu" 
+                          FontSize="20" 
+                          FontWeight="Bold" 
+                          Foreground="#2c3e50"/>
+            </Border>
+
+            <!-- Ana Form Alanı -->
+            <Grid Grid.Row="1" 
+                  ColumnDefinitions="1*,1*" 
+                  RowDefinitions="Auto" 
+                  Margin="0,0,0,20">
+                
+                <!-- Sol Panel - Temel Bilgiler -->
+                <Border Grid.Column="0" 
+                        Background="White" 
+                        CornerRadius="10" 
+                        Padding="20" 
+                        Margin="0,0,10,0"
+                        BoxShadow="0 2 8 0 #20000000">
+                    <StackPanel Spacing="15">
+                        <TextBlock Text="TEMEL BİLGİLER" 
+                                  FontWeight="Bold" 
+                                  FontSize="14" 
+                                  Foreground="#34495e" 
+                                  Margin="0,0,0,10"/>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Firma Adı *" FontWeight="Medium" Foreground="#2c3e50"/>
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <ComboBox Width="250"
+                                          Height="35"
+                                          ItemsSource="{Binding Firmalar}"
+                                          SelectedItem="{Binding SeciliFirma}"
+                                          PlaceholderText="Firma seçiniz..."/>
+                                <Button Width="35" Height="35"
+                                        HorizontalAlignment="Center"
+                                        Content="+"
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Background="#3498db"
+                                        Foreground="White"
+                                        CornerRadius="5"
+                                        Command="{Binding FirmaEkleCommand}">
+                                    <Button.Styles>
+                                        <Style Selector="Button:pointerover">
+                                            <Setter Property="Background" Value="#2980b9"/>
+                                        </Style>
+                                        <Style Selector="Button:pressed">
+                                            <Setter Property="Background" Value="#21618c"/>
+                                        </Style>
+                                    </Button.Styles>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Başvuru No *" FontWeight="Medium" Foreground="#2c3e50"/>
+                            <TextBox Width="250" 
+                                    Height="35" 
+                                    HorizontalAlignment="Left"
+                                    Text="{Binding BasvuruNo}"
+                                    Watermark="Örn: TSE-2024-001"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Başvuru Tarihi *" FontWeight="Medium" Foreground="#2c3e50"/>
+                            <DatePicker Width="250" 
+                                       Height="35" 
+                                       HorizontalAlignment="Left"
+                                       SelectedDate="{Binding BasvuruTarihi}"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Belge Tipi *" FontWeight="Medium" Foreground="#2c3e50"/>
+                            <StackPanel Orientation="Horizontal" Spacing="20">
+                                <RadioButton Content="Özel"
+                                            GroupName="BelgeTipi"
+                                            Foreground="#2c3e50"
+                                            IsChecked="{Binding Ozel}"
+                                            FontSize="13"/>
+                                <RadioButton Content="Belgelendirme"
+                                            GroupName="BelgeTipi"
+                                            Foreground="#2c3e50"
+                                            IsChecked="{Binding Belgelendirme}"
+                                            FontSize="13"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Deney Sayısı *" FontWeight="Medium" Foreground="#2c3e50"/>
+                            <NumericUpDown Width="120"
+                                          Height="35"
+                                          HorizontalAlignment="Left"
+                                          Minimum="1"
+                                          Maximum="10"
+                                          Increment="1"
+                                          FormatString="0"
+                                          Value="{Binding DeneySayisi}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Sağ Panel - Deney Detayları -->
+                <Border Grid.Column="1" 
+                        Background="White" 
+                        CornerRadius="10" 
+                        Padding="20" 
+                        Margin="10,0,0,0"
+                        BoxShadow="0 2 8 0 #20000000">
+                    <StackPanel Spacing="15">
+                        <TextBlock Text="DENEY DETAYLARI" 
+                                  FontWeight="Bold" 
+                                  FontSize="14" 
+                                  Foreground="#34495e" 
+                                  Margin="0,0,0,10"/>
+                        
+                        <ScrollViewer Height="300" 
+                                     VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding DeneyGirdileri}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#f8f9fa" 
+                                               CornerRadius="8" 
+                                               Padding="15" 
+                                               Margin="0,0,0,10">
+                                            <StackPanel Spacing="12">
+                                                <TextBlock Text="Deney Detayı" 
+                                                          FontWeight="Bold" 
+                                                          FontSize="12" 
+                                                          Foreground="#7f8c8d"/>
+                                                
+                                                <StackPanel Spacing="6">
+                                                    <TextBlock Text="Deney Türü *" 
+                                                              FontSize="12" 
+                                                              FontWeight="Medium" 
+                                                              Foreground="#2c3e50"/>
+                                                    <ComboBox Width="250"
+                                                             Height="32"
+                                                             ItemsSource="{Binding #root.DataContext.DeneyTurleri}"
+                                                             SelectedItem="{Binding DeneyTuru}"
+                                                             PlaceholderText="Deney türü seçiniz..."/>
+                                                </StackPanel>
+
+                                                <StackPanel Spacing="6">
+                                                    <TextBlock Text="Sorumlu Personel *" 
+                                                              FontSize="12" 
+                                                              FontWeight="Medium" 
+                                                              Foreground="#2c3e50"/>
+                                                    <ComboBox Width="250"
+                                                             Height="32"
+                                                             ItemsSource="{Binding #root.DataContext.Personeller}"
+                                                             SelectedItem="{Binding SorumluPersonel}"
+                                                             PlaceholderText="Personel seçiniz..."/>
+                                                </StackPanel>
+
+                                                <CheckBox Content="Akredite Deney"
+                                                         IsChecked="{Binding Akredite}"
+                                                         FontSize="12"
+                                                         Foreground="#2c3e50"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Kaydet Butonu -->
+            <Border Grid.Row="2" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,0,0,20">
+                <Button Content="KAYDET"
+                        Width="200"
+                        Height="45"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Background="#27ae60"
+                        Foreground="White"
+                        CornerRadius="8"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Command="{Binding KaydetCommand}">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover">
+                            <Setter Property="Background" Value="#229954"/>
+                        </Style>
+                        <Style Selector="Button:pressed">
+                            <Setter Property="Background" Value="#1e8449"/>
+                        </Style>
+                    </Button.Styles>
+                </Button>
+            </Border>
+
+            <!-- Son Kayıtlar -->
+            <Border Grid.Row="3" 
+                    Background="White" 
+                    CornerRadius="10" 
+                    Padding="20" 
+                    BoxShadow="0 2 8 0 #20000000">
+                <StackPanel Spacing="15">
+                    <TextBlock Text="SON KAYITLAR" 
+                              FontWeight="Bold" 
+                              FontSize="14" 
+                              Foreground="#34495e"/>
+                    <DataGrid AutoGenerateColumns="True"
+                             ItemsSource="{Binding SonKayitlar}"
+                             Height="250"
+                             GridLinesVisibility="Horizontal"
+                             HeadersVisibility="Column"
+                             CanUserReorderColumns="True"
+                             CanUserResizeColumns="True"
+                             CanUserSortColumns="True">
+                        <DataGrid.Styles>
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#ecf0f1"/>
+                                <Setter Property="Foreground" Value="#2c3e50"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Padding" Value="8"/>
+                            </Style>
+                            <Style Selector="DataGridRow:nth-child(even)">
+                                <Setter Property="Background" Value="#f8f9fa"/>
+                            </Style>
+                            <Style Selector="DataGridRow:pointerover">
+                                <Setter Property="Background" Value="#e3f2fd"/>
+                            </Style>
+                        </DataGrid.Styles>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
