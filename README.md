@@ -1,1 +1,1 @@
-Web için beklemye alındı.
+Web için beklemeye alındı.
